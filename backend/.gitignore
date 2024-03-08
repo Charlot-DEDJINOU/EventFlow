@@ -1,0 +1,34 @@
+# Dossiers générés par Node.js
+node_modules/
+
+# Fichier de configuration locale (par exemple, pour VSCode)
+.vscode/
+
+# Fichiers de configuration système
+.DS_Store
+
+# Fichiers journaux
+logs/
+
+# Fichiers de sauvegarde (par exemple, pour Vim)
+*.swp
+
+# Fichiers d'environnement (pour stocker les secrets, ne doivent pas être versionnés)
+.env
+
+# Fichiers de configuration spécifiques à l'utilisateur
+config/userconfig.json
+
+# Fichiers de sauvegarde de bases de données SQLite
+*.sqlite3
+*.sqlite
+*.db
+
+# Fichiers de logs
+*.log
+
+# Dossier de build (s'il est généré)
+/build/
+
+# Fichiers de configuration spécifiques à l'utilisateur pour npm
+.npmrc
