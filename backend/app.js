@@ -1,30 +1,53 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require("body-parser");
-const databaseInit = require("./database/databaseInit");  // Importez le module
+const databaseInit = require("./database/databaseInit");
+const databaseConfig = require('./database/database');
+const WebSocket = require('ws');
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-
-const port = 3000;
+const server = new WebSocket.Server({ port: 3001 });
 
 databaseInit.initializeDatabase();
 
-const getInvitesRoute = require("./routes/getInvites");
-const addInviteRoute = require("./routes/addInvite");
-const updateInviteRoute = require("./routes/updateInvite");
+let clients = new Set();
 
-app.use("/invites", getInvitesRoute);
-app.use("/invites", addInviteRoute);
-app.use("/invites", updateInviteRoute);
+let db = databaseConfig.createDb() ;
 
-app.get("/", (req, res) => {
-  res.send("Mon Backend !");
+server.on('connection', (ws) => {
+
+  clients.add(ws);
+  console.log('Nouvelle connexion WebSocket établie.');
+
+  db.all('SELECT * FROM message', (err, rows) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des messages :', err);
+    } else {
+      
+      rows.forEach((row) => {
+        ws.send(JSON.stringify(row));
+      });
+    }
+  });
+
+  ws.on('message', (message) => {
+    console.log('Message reçu :', message);
+
+    message = JSON.parse(message) ;
+    
+    db.run('INSERT INTO message (destinateur, recepteur ,message) VALUES (?,?,?)', [message.destinateur , message.recepteur , message.message], (err) => {
+      if (err) {
+        console.error('Erreur lors de l\'enregistrement du message :', err);
+      }
+    });
+
+    clients.forEach((client) => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify(message));
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    clients.delete(ws);
+    console.log('Connexion WebSocket fermée.');
+  });
 });
 
-app.listen(port, () => {
-  console.log(`Serveur démarré sur le port ${port}`);
-});
-
-module.exports = app;
+console.log('Serveur WebSocket en cours d\'exécution sur le port 3001');
