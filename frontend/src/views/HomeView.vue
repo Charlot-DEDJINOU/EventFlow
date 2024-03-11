@@ -1,5 +1,5 @@
 <script setup>
-import BodyComponent from '@/components/BodyComponent.vue';
+import BodyComponent from '@/components/BodyComponent.vue'
 </script>
 
 <template>
