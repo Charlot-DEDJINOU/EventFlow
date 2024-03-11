@@ -23,7 +23,7 @@ config/userconfig.json
 *.sqlite3
 *.sqlite
 *.db
-
+*.txt
 # Fichiers de logs
 *.log
 
