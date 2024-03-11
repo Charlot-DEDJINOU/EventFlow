@@ -2,7 +2,8 @@ const databaseInit = require("./database/databaseInit");
 const InviteController = require("./controller/InviteController");
 const WebSocket = require('ws');
 
-const server = new WebSocket.Server({ port: 3001 });
+const port = process.env.PORT || 8080 ;
+const server = new WebSocket.Server({ port: port });
 
 databaseInit.initializeDatabase();
 
@@ -61,4 +62,4 @@ server.on('connection', async (ws) => {
 
 });
 
-console.log('Serveur WebSocket en cours d\'exécution sur le port 3001');
+console.log('Serveur WebSocket en cours d\'exécution sur le port ', port);
