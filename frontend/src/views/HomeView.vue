@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import BodyComponent from '@/components/BodyComponent.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <BodyComponent />
   </main>
 </template>
