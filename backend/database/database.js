@@ -26,7 +26,8 @@ function createTableInvites(db) {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         appelation TEXT,
         numero TEXT,
-        status BOOLEAN DEFAULT 0
+        status TEXT,
+        is_entry BOOLEAN DEFAULT 0
       )`,
       (err) => {
         if (err) {
@@ -50,11 +51,11 @@ function insertInvites(db) {
       db.run(`BEGIN TRANSACTION`);
 
       const stmt = db.prepare(
-        `INSERT INTO Invites (appelation, numero , status) VALUES (?, ?, ?)`
+        `INSERT INTO Invites (appelation, numero , status, is_entry) VALUES (?, ?, ?, ?)`
       );
 
-      for (const [appelation, numero , status] of data) {
-        stmt.run(appelation.trim(), numero.trim() , status.trim());
+      for (const [appelation, numero , status, is_entry] of data) {
+        stmt.run(appelation.trim(), numero.trim() , status.trim(), is_entry.trim());
       }
 
       stmt.finalize();

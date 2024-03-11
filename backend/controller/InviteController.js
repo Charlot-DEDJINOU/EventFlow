@@ -1,11 +1,11 @@
 const databaseConfig = require("../database/database");
 
 const addInvite = (item) => {
-  const { appelation, numero, status } = item;
+  const { appelation, numero, status , is_entry } = item;
   const db = databaseConfig.createDb();
   db.run(
-    "INSERT INTO Invites (appelation, numero, status) VALUES (?, ?, ?)",
-    [appelation, numero, status ],
+    "INSERT INTO Invites (appelation, numero, status, is_entry) VALUES (?, ?, ?, ?)",
+    [appelation, numero, status, is_entry , is_entry],
 
     function (err) {
       if (err) {
@@ -36,11 +36,11 @@ const getInvites = () => {
 };
 
 const update = (item, id) => {
-  const { appelation, numero, status } = item;
+  const { appelation, numero, status, is_entry } = item;
   const db = databaseConfig.createDb();
   db.run(
-    "UPDATE Invites SET appelation = ?, numero = ?, status = ? WHERE id = ?",
-    [appelation, numero, status, id],
+    "UPDATE Invites SET appelation = ?, numero = ?, status = ?, is_entry = ?, WHERE id = ?",
+    [appelation, numero, status, is_entry, id],
 
     (err) => {
       if (err) {
