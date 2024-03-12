@@ -1,15 +1,22 @@
 <script>
-import { ref } from 'vue'
-import InvitesComponent from './InvitesComponent.vue'
-// eslint-disable-next-line no-unused-vars
-import socket from '../websocket/index.js'
+import InviteItem from './InviteItem.vue'
+import { useStore } from 'vuex'
+import { computed, ref } from 'vue'
+import { updateState, socket } from '../websocket';
 
 export default {
   components: {
-    InvitesComponent
+    InviteItem
   },
   setup() {
-    const choice = ref(true)
+    const store = useStore();
+    const invites = ref(computed(() => store.state.invites));
+
+    socket.onmessage = function (event) {
+      updateState(JSON.parse(event.data), store)
+    }
+
+    const choice = ref(true);
 
     const setChoice = () => {
       choice.value = !choice.value
@@ -17,7 +24,8 @@ export default {
 
     return {
       choice,
-      setChoice
+      setChoice,
+      invites
     }
   }
 }
@@ -43,8 +51,11 @@ export default {
         >Statistiques</span
       >
     </div>
-    <div class="container">
-      <InvitesComponent />
+    <div class="container mt-5">
+      <input type="email" class="form-control my-3" placeholder="Rechercher" id="exampleInputEmail1" aria-describedby="emailHelp" />
+      <div class="invites">
+        <InviteItem v-for="(invite, index) in invites" :key="index" :invite="invite"/>
+      </div>
     </div>
   </section>
 </template>
@@ -56,5 +67,12 @@ section .menu .choice {
 }
 .cursor {
   cursor: pointer;
+}
+section .invites {
+  height: 65vh;
+  overflow: scroll;
+}
+::-webkit-scrollbar {
+  width: 0px;
 }
 </style>
