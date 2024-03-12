@@ -2,6 +2,9 @@
 import EditIcon from './icons/EditIcon.vue'
 
 export default {
+  props : {
+    invite : Object
+  },
   components: {
     EditIcon
   }
@@ -9,26 +12,18 @@ export default {
 </script>
 <template>
   <div
-    class="item w-100 p-2 d-flex justify-content-between align-items-center invite mb-2 text-bg-success px-3"
+    class="item w-100 p-2 d-flex justify-content-between align-items-center invite mb-2 px-3" :class="invite.is_entry === 0 ? 'text-bg-danger' : 'text-bg-success'"
   >
     <div class="d-flex flex-wrap justify-content-between align-items-center" style="width: 80%">
-      <span class="m-2">Charlot DEDJINOU</span>
-      <span class="m-2">Etudiant</span>
-      <span class="m-2">59 10 52 67</span>
-      <span class="m-2">Présent</span>
+      <div class="m-2 d-flex flex-column w-50">
+        <span class="m-2">{{ invite.appelation }}</span>
+        <span class="m-2">{{ invite.status }}</span>
+        <span class="m-2">{{ invite.numero }}</span>
+      </div>
+      
+      <span class="m-2 fw-bold">{{ invite.is_entry === 0 ? 'Present' : 'Absent'}}</span>
     </div>
-    <EditIcon class="text-white fw-bold d-inline-block my-2" />
-  </div>
-  <div
-    class="item w-100 p-2 d-flex justify-content-between align-items-center invite mb-2 text-bg-danger px-3"
-  >
-    <div class="d-flex flex-wrap justify-content-between align-items-center" style="width: 80%">
-      <span class="m-2">Charlot DEDJINOU</span>
-      <span class="m-2">Etudiant</span>
-      <span class="m-2">59 10 52 67</span>
-      <span class="m-2">Absent</span>
-    </div>
-    <EditIcon class="text-white fw-bold d-inline-block my-2" />
+    <EditIcon class="text-white fw-bold d-inline-block m-2" />
   </div>
 </template>
 <style scoped>
