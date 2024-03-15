@@ -1,9 +1,9 @@
 <script setup>
-import BodyComponent from '@/components/BodyComponent.vue'
+import AllInvites from '@/components/AllInvites.vue'
 </script>
 
 <template>
   <main>
-    <BodyComponent />
+    <AllInvites />
   </main>
 </template>
