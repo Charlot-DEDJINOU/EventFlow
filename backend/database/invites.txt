@@ -18,13 +18,13 @@ FNEB,21 00 56 07,Enseignant,0
 JURY,21 00 56 07,Enseignant,0
 JURY,21 00 56 07,Enseignant,0
 JURY,21 00 56 07,Enseignant,0
-Carole ADOGUI (YALI),67 88 73 25,Diplômés,0
-C3E,67 88 73 25,Diplômés,0
-Blandine ALLOWANOU,67 88 73 25,Diplômés,0
-Justine ADOUKONOU,67 88 73 25,Diplômés,0
-Gbééré Achille Eye,67 88 73 25,Diplômés,0
-Marcellin KPANGBANOU,67 88 73 25,Diplômés,0
-Odile LALOU,67 88 73 25,Diplômés,0
-Florentin EKE,67 88 73 25,Diplômés,0
-Mouchidatou KOSSOKO,67 88 73 25,Diplômés,0
-Lampride TOGBE,67 88 73 25,Diplômés,0
+Carole ADOGUI (YALI),67 88 73 25,Diplome,0
+C3E,67 88 73 25,Diplome,0
+Blandine ALLOWANOU,67 88 73 25,Diplome,0
+Justine ADOUKONOU,67 88 73 25,Diplome,0
+Gbééré Achille Eye,67 88 73 25,Diplome,0
+Marcellin KPANGBANOU,67 88 73 25,Diplome,0
+Odile LALOU,67 88 73 25,Diplome,0
+Florentin EKE,67 88 73 25,Diplome,0
+Mouchidatou KOSSOKO,67 88 73 25,Diplome,0
+Lampride TOGBE,67 88 73 25,Diplome,0

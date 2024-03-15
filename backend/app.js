@@ -33,23 +33,25 @@ server.on('connection', async (ws) => {
   sendInvites(ws);
 
   ws.on('message', async (message) => {
-    const data = JSON.parse(message)
+    let data = JSON.parse(message)
+    console.log(data)
     switch (data.action) {
       case 'getinvites':
         sendInvites(ws);
         break
-      case 'addinvite':
-        InviteController.addInvite(data.item)
-
+      case 'addInvite':
+        const id = await InviteController.addInvite(data.item)
+        data.item.id = id;
+        console.log(data.item)
         const newinvite = {
           action: 'add',
-          item: [data.item]
+          item: data.item
         }
 
         broadcast(newinvite);
 
         break
-      case 'updateinvite':
+      case 'updateInvite':
         console.log('Invite reçu :', data.item)
         InviteController.update(data.item, data.item.id)
 
