@@ -15,17 +15,17 @@ socket.onclose = function () {
 export const updateState = (message, store) => {
   switch (message.action) {
     case 'invites':
-      store.dispatch('ResetInvites', message.items);
+      store.dispatch('ResetInvites', message.items)
       break
-    case 'add' : 
-      store.dispatch('ToggleInvites', message.item); 
-      break 
+    case 'add':
+      store.dispatch('ToggleInvites', message.item)
+      break
     case 'update':
       store.dispatch('ToggleInvite', message.item)
-      break 
+      break
   }
 }
 
 export const sendMessage = (data) => {
-    socket.send(JSON.stringify(data));
+  socket.send(JSON.stringify(data))
 }
