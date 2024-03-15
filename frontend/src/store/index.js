@@ -7,14 +7,14 @@ export default createStore({
   getters: {},
   mutations: {
     resetInvites(state, invites) {
-        state.invites = invites
+      state.invites = invites
     },
     addInvite(state, invite) {
       state.invites.push(invite)
     },
     updateInvite(state, updatedInvite) {
       for (let i = 0; i < state.invites.length; i++) {
-        if (state.invites[i].id === updatedInvite.id) {
+        if (state.invites[i].id == updatedInvite.id) {
           state.invites[i] = updatedInvite
           break
         }
