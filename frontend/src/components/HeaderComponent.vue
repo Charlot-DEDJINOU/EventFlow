@@ -25,7 +25,7 @@ export default {
       <router-link to="/" class="text-decoration-none">
         <span
           :class="
-            choice ? 'mx-3 fs-5 fw-medium py-2 px-3 choice' : 'mx-3 fs-5 fw-medium py-2 px-3 cursor'
+            choice ? 'mx-3 fw-medium py-2 px-3 choice' : 'mx-3 fw-medium py-2 px-3 cursor'
           "
           @click="setChoice(true)"
           >Liste des invités</span
@@ -35,8 +35,8 @@ export default {
         <span
           :class="
             !choice
-              ? 'mx-3 fs-5 fw-medium py-2 px-3 choice'
-              : 'mx-3 fs-5 fw-medium py-2 px-3 cursor'
+              ? 'mx-3 fw-medium py-2 px-3 choice'
+              : 'mx-3 fw-medium py-2 px-3 cursor'
           "
           @click="setChoice(false)"
           >Statistiques</span
