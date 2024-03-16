@@ -24,20 +24,14 @@ export default {
     <div class="mt-5 container d-flex border-bottom menu pb-2">
       <router-link to="/" class="text-decoration-none">
         <span
-          :class="
-            choice ? 'mx-3 fw-medium py-2 px-3 choice' : 'mx-3 fw-medium py-2 px-3 cursor'
-          "
+          :class="choice ? 'mx-3 fw-medium py-2 px-3 choice' : 'mx-3 fw-medium py-2 px-3 cursor'"
           @click="setChoice(true)"
           >Liste des invités</span
         >
       </router-link>
       <router-link to="/statistique" class="text-decoration-none">
         <span
-          :class="
-            !choice
-              ? 'mx-3 fw-medium py-2 px-3 choice'
-              : 'mx-3 fw-medium py-2 px-3 cursor'
-          "
+          :class="!choice ? 'mx-3 fw-medium py-2 px-3 choice' : 'mx-3 fw-medium py-2 px-3 cursor'"
           @click="setChoice(false)"
           >Statistiques</span
         >

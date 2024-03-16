@@ -1,32 +1,47 @@
 <script>
 import { useStore } from 'vuex'
+import { onMounted, watch, ref } from 'vue'
 
 export default {
   setup() {
     const store = useStore()
 
-    let etudiant_present = 0
-    let etudiant_absent = 0
-    let enseignant_present = 0
-    let enseignant_absent = 0
-    let diplome_present = 0
-    let diplome_absent = 0
+    let etudiant_present = ref(0)
+    let etudiant_absent = ref(0)
+    let enseignant_present = ref(0)
+    let enseignant_absent = ref(0)
+    let diplome_present = ref(0)
+    let diplome_absent = ref(0)
 
-    for (const invite of store.state.invites) {
-      if (invite.status == 'Etudiant' && invite.is_entry == 1) {
-        etudiant_present++
-      } else if (invite.status == 'Etudiant' && invite.is_entry == 0) {
-        etudiant_absent++
-      } else if (invite.status == 'Enseignant' && invite.is_entry == 1) {
-        enseignant_present++
-      } else if (invite.status == 'Enseignant' && invite.is_entry == 0) {
-        enseignant_absent++
-      } else if (invite.status == 'Diplome' && invite.is_entry == 1) {
-        diplome_present++
-      } else if (invite.status == 'Diplome' && invite.is_entry == 0) {
-        diplome_absent++
+    const statistiques = () => {
+
+      etudiant_present.value = 0
+      etudiant_absent.value = 0
+      enseignant_present.value = 0
+      enseignant_absent.value = 0
+      diplome_present.value = 0
+      diplome_absent.value = 0
+
+      for (const invite of store.state.invites) {
+        if (invite.status == 'Etudiant' && invite.is_entry == 1) {
+          etudiant_present.value++
+        } else if (invite.status == 'Etudiant' && invite.is_entry == 0) {
+          etudiant_absent.value++
+        } else if (invite.status == 'Enseignant' && invite.is_entry == 1) {
+          enseignant_present.value++
+        } else if (invite.status == 'Enseignant' && invite.is_entry == 0) {
+          enseignant_absent.value++
+        } else if (invite.status == 'Diplome' && invite.is_entry == 1) {
+          diplome_present.value++
+        } else if (invite.status == 'Diplome' && invite.is_entry == 0) {
+          diplome_absent.value++
+        }
       }
     }
+
+    onMounted(statistiques)
+
+    watch(() => store.state.invites, statistiques)
 
     return {
       etudiant_present,
@@ -58,7 +73,9 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * etudiant_present / (etudiant_absent + etudiant_present)) + '%' }"
+            :style="{
+              width: (100 * etudiant_present) / (etudiant_absent + etudiant_present) + '%'
+            }"
           ></div>
         </div>
       </div>
@@ -77,7 +94,9 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * enseignant_present / (enseignant_absent + enseignant_present)) + '%' }"
+            :style="{
+              width: (100 * enseignant_present) / (enseignant_absent + enseignant_present) + '%'
+            }"
           ></div>
         </div>
       </div>
@@ -96,7 +115,7 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * diplome_present / (diplome_absent + diplome_present)) + '%' }"
+            :style="{ width: (100 * diplome_present) / (diplome_absent + diplome_present) + '%' }"
           ></div>
         </div>
       </div>

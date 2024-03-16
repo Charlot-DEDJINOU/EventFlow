@@ -4,7 +4,7 @@ import AddIcon from './icons/AddIcon.vue'
 import AddInvite from './AddInvite.vue'
 import SuccessfulComponent from './SuccessfulComponent.vue'
 import { useStore } from 'vuex'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { updateState, socket } from '../websocket'
 
 export default {
@@ -16,12 +16,10 @@ export default {
   },
   setup() {
     const store = useStore()
-    const allInvites = ref(computed(() => store.state.invites))
     const filterInvites = ref(store.state.invites)
     const text = ref('')
 
     socket.onmessage = function (event) {
-      console.log(event)
       updateState(JSON.parse(event.data), store)
     }
 
@@ -29,7 +27,7 @@ export default {
 
     const search = () => {
       const searchText = text.value.toLowerCase()
-      filterInvites.value = allInvites.value.filter((invite) => {
+      filterInvites.value = store.state.invites.filter((invite) => {
         return (
           invite.appelation.toLowerCase().includes(searchText) ||
           invite.status.toLowerCase().includes(searchText) ||
@@ -37,6 +35,8 @@ export default {
         )
       })
     }
+
+    watch(() => store.state.invites, search)
 
     const showSecondModal = () => {
       show.value = false

@@ -22,7 +22,7 @@ export default {
 <template>
   <div
     class="item w-100 p-2 d-flex justify-content-between align-items-center invite mb-2 px-3"
-    :class="invite.is_entry === 0 ? 'text-bg-danger' : 'text-bg-success'"
+    :class="invite.is_entry == 0 ? 'text-bg-danger' : 'text-bg-success'"
   >
     <div class="d-flex flex-wrap justify-content-between align-items-center" style="width: 80%">
       <div class="m-2 d-flex flex-column w-50">
