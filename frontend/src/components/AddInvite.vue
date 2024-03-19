@@ -75,6 +75,8 @@ export default {
         <option value="Enseignant" selected>Enseignant</option>
         <option value="Etudiant">Etudiant</option>
         <option value="Diplome">Diplome</option>
+        <option value="Lyceen">Lyceen</option>
+        <option value="Entrepreneur">Entrepreneur</option>
       </select>
     </div>
     <div class="col-md-6">
