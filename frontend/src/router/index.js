@@ -12,7 +12,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/update/:id/:appelation/:numero/:status/:email/:sexe/:is_entry',
+      path: '/update/:id/:appelation/:numero/:status/:email/:sexe/:is_boursier/:is_entry',
       component: UpdateInviteView
     },
     {

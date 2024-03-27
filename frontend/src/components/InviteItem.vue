@@ -50,6 +50,8 @@ export default {
         '/' +
         invite.sexe +
         '/' +
+        invite.is_boursier +
+        '/' +
         invite.is_entry
       "
     >

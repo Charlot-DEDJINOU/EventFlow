@@ -21,6 +21,7 @@ export default {
       status: route.params.status,
       email: route.params.email,
       sexe: route.params.sexe,
+      is_boursier : route.params.is_boursier,
       is_entry: route.params.is_entry
     })
 
@@ -34,6 +35,7 @@ export default {
         data.value.status === '' ||
         data.value.email === '' ||
         data.value.sexe === '' ||
+        data.value.is_boursier === null,
         data.value.is_entry === null
       )
         show.value = true
@@ -106,6 +108,13 @@ export default {
           required
         />
       </div>
+      <div class="col-md-12">
+        <label for="validationDefault08" class="form-label">Êtes-vous bénéficiaire du programme de bourse de la MCF ?</label>
+        <select class="form-select" id="validationDefault08" required v-model="data.is_boursier">
+          <option value="1">Oui</option>
+          <option value="0">Non</option>
+        </select>
+      </div>
       <div class="col-md-6">
         <label for="validationDefault04" class="form-label">Status</label>
         <select class="form-select" id="validationDefault04" required v-model="data.status">
@@ -115,6 +124,7 @@ export default {
           <option value="Diplome">Diplome</option>
           <option value="Lyceen">Lyceen</option>
           <option value="Entrepreneur">Entrepreneur</option>
+          <option value="Autre">Autre</option>
         </select>
       </div>
       <div class="col-md-6 mb-3">

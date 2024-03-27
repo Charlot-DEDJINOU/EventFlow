@@ -13,8 +13,11 @@ export default {
     let lyceen = ref(0)
     let entrepreneur = ref(0)
     let cadre = ref(0)
+    let autre = ref(0)
     let masculin = ref(0)
     let feminin = ref(0)
+    let boursier = ref(0)
+    let no_boursier = ref(0)
 
     const statistiques = () => {
       etudiant.value = 0
@@ -23,8 +26,11 @@ export default {
       lyceen.value = 0
       entrepreneur.value = 0
       cadre.value = 0
+      autre.value = 0
       masculin.value = 0
       feminin.value = 0
+      boursier.value = 0
+      no_boursier.value = 0
       total.value = store.state.invites.length
 
       for (const invite of store.state.invites) {
@@ -40,12 +46,20 @@ export default {
           entrepreneur.value++
         } else if (invite.status == 'Cadre') {
           cadre.value++
-        }
+        } else if (invite.status == 'Autre') {
+          autre.value++
+        } 
 
         if (invite.sexe == 'Masculin') {
           masculin.value++
         } else {
           feminin.value++
+        }
+
+        if(invite.is_boursier == 1) {
+          boursier.value++
+        } else {
+          no_boursier.value++
         }
       }
     }
@@ -61,8 +75,11 @@ export default {
       lyceen,
       entrepreneur,
       cadre,
+      autre,
       masculin,
       feminin,
+      boursier,
+      no_boursier,
       total
     }
   }
@@ -196,6 +213,27 @@ export default {
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Autres Status</span>
+          <i>{{ autre + '/' + total }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width: (100 * autre) / total + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Masculin</span>
           <i>{{ masculin + '/' + total }}</i>
         </div>
@@ -232,6 +270,48 @@ export default {
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
               width: (100 * feminin) / total + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Bénéficiaires MCF</span>
+          <i>{{ boursier + '/' + total }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width: (100 * boursier) / total + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Non Bénéficiaires MCF</span>
+          <i>{{ no_boursier + '/' + total }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width: (100 * no_boursier) / total + '%'
             }"
           ></div>
         </div>
