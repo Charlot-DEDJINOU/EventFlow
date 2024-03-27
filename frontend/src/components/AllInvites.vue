@@ -21,7 +21,7 @@ export default {
 
     socket.onmessage = function (event) {
       console.log(event)
-      updateState(JSON.parse(event.data), store)
+      updateState(JSON.parse(event.data), store, search)
     }
 
     const show = ref(true)

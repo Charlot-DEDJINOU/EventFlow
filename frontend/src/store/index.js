@@ -10,7 +10,7 @@ export default createStore({
       state.invites = invites
     },
     addInvite(state, invite) {
-      state.invites.push(invite)
+      state.invites.unshift(invite)
     },
     updateInvite(state, updatedInvite) {
       for (let i = 0; i < state.invites.length; i++) {

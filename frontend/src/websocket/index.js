@@ -12,7 +12,7 @@ socket.onclose = function () {
   console.log('Connexion WebSocket fermée')
 }
 
-export const updateState = (message, store) => {
+export const updateState = (message, store, callback) => {
   switch (message.action) {
     case 'invites':
       store.dispatch('ResetInvites', message.items)
@@ -24,6 +24,8 @@ export const updateState = (message, store) => {
       store.dispatch('ToggleInvite', message.item)
       break
   }
+
+  callback()
 }
 
 export const sendMessage = (data) => {

@@ -95,7 +95,7 @@ export default {
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
-          <span class="mb-2 d-inline-block fs-5 fw-medium">Cadres Administratifs/Responsables</span>
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Cadres Administratifs</span>
           <i>{{ cadre + '/' + total }}</i>
         </div>
         <div
