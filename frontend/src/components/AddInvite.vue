@@ -11,6 +11,8 @@ export default {
       appelation: '',
       numero: '',
       status: 'Enseignant',
+      email : '',
+      sexe : 'Masculin',
       is_entry: 0
     })
     const show = ref(false)
@@ -21,6 +23,8 @@ export default {
         data.value.appelation === '' ||
         data.value.numero === '' ||
         data.value.status === '' ||
+        data.value.email === '' ||
+        data.value.sexe === '' ||
         data.value.is_entry === null
       )
         show.value = true
@@ -59,6 +63,24 @@ export default {
       />
     </div>
     <div class="col-md-6">
+      <label for="validationDefault07" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="validationDefault07"
+        placeholder="example@gmail.com"
+        v-model="data.email"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault08" class="form-label">Sexe</label>
+      <select class="form-select" id="validationDefault08" required v-model="data.sexe">
+        <option value="Masculin">Masculin</option>
+        <option value="Feminin">Féminin</option>
+      </select>
+    </div>
+    <div class="col-md-6">
       <label for="validationDefault02" class="form-label">Telephone</label>
       <input
         type="text"
@@ -73,6 +95,7 @@ export default {
       <label for="validationDefault04" class="form-label">Status</label>
       <select class="form-select" id="validationDefault04" required v-model="data.status">
         <option value="Enseignant" selected>Enseignant</option>
+        <option value="Cadre">Cadre Administratif/Responsable</option>
         <option value="Etudiant">Etudiant</option>
         <option value="Diplome">Diplome</option>
         <option value="Lyceen">Lyceen</option>
