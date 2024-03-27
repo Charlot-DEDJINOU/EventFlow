@@ -27,6 +27,8 @@ function createTableInvites(db) {
         appelation TEXT,
         numero TEXT,
         status TEXT,
+        sexe TEXT,
+        email TEXT,
         is_entry BOOLEAN DEFAULT 0
       )`,
       (err) => {
