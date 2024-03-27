@@ -111,8 +111,8 @@ export default {
       <div class="col-md-12">
         <label for="validationDefault08" class="form-label">Êtes-vous bénéficiaire du programme de bourse de la MCF ?</label>
         <select class="form-select" id="validationDefault08" required v-model="data.is_boursier">
-          <option value="1">Oui</option>
-          <option value="0">Non</option>
+          <option value="true">Oui</option>
+          <option value="fasle">Non</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -130,8 +130,8 @@ export default {
       <div class="col-md-6 mb-3">
         <label for="validationDefault04" class="form-label">Présent</label>
         <select class="form-select" id="validationDefault04" required v-model="data.is_entry">
-          <option value="1" selected>Oui</option>
-          <option value="0">Non</option>
+          <option value="true" selected>Oui</option>
+          <option value="false">Non</option>
         </select>
       </div>
       <div class="alet alert-danger" v-if="show">Veuillez remplir tout les champs</div>
