@@ -2,13 +2,13 @@ const databaseConfig = require("../database/database");
 
 const addInvite = async (item) => {
   try {
-    const { appelation, numero, status, sexe, email, is_entry } = item;
+    const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
     const db = databaseConfig.createDb();
 
     await new Promise((resolve, reject) => {
       db.run(
-        "INSERT INTO Invites (appelation, numero, status, sexe, email, is_entry) VALUES (?, ?, ?, ?, ?, ?)",
-        [appelation, numero, status, sexe, email, is_entry],
+        "INSERT INTO Invites (appelation, numero, status, sexe, email, is_boursier, is_entry) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [appelation, numero, status, sexe, email, is_boursier, is_entry],
         function (err) {
           if (err) {
             console.error(err);
@@ -57,11 +57,11 @@ const getInvites = () => {
 };
 
 const update = (item, id) => {
-  const { appelation, numero, status, sexe, email, is_entry } = item;
+  const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
   const db = databaseConfig.createDb();
   db.run(
-    "UPDATE Invites SET appelation = ?, numero = ?, status = ?, sexe = ?, email = ?, is_entry = ? WHERE id = ?",
-    [appelation, numero, status, sexe, email, is_entry, id],
+    "UPDATE Invites SET appelation = ?, numero = ?, status = ?, sexe = ?, email = ?, is_boursier = ?, is_entry = ? WHERE id = ?",
+    [appelation, numero, status, sexe, email, is_boursier, is_entry, id],
 
     (err) => {
       if (err) {

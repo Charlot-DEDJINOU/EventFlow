@@ -29,6 +29,7 @@ function createTableInvites(db) {
         status TEXT,
         sexe TEXT,
         email TEXT,
+        is_boursier BOOLEAN DEFAULT 0,
         is_entry BOOLEAN DEFAULT 0
       )`,
       (err) => {
