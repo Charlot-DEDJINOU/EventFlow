@@ -53,7 +53,7 @@ server.on('connection', async (ws) => {
         break
       case 'updateInvite':
         console.log('Invite reçu :', data.item)
-        InviteController.update(data.item, data.item.id)
+        InviteController.updateInvite(data.item, data.item.id)
 
         const updateinvite = {
           action: 'update',
