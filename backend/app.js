@@ -1,21 +1,19 @@
-const database = require('./database/database')
-const InviteController = require('./controller/InviteController')
-const WebSocket = require('ws')
+const WebSocket = require('ws');
+const { connectDB } = require('./database/database');
+const InviteController = require('./controller/InviteController');
 
-const port = process.env.PORT || 8080
-const server = new WebSocket.Server({ port: port })
+const port = process.env.PORT || 8080;
+const server = new WebSocket.Server({ port: port });
 
-database.createInvitesTable()
-
-let clients = new Set()
+let clients = new Set();
 
 const broadcast = (data) => {
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(data))
+      client.send(JSON.stringify(data));
     }
-  })
-}
+  });
+};
 
 const sendInvites = async (ws) => {
   ws.send(
@@ -23,53 +21,55 @@ const sendInvites = async (ws) => {
       action: 'invites',
       items: await InviteController.getInvites()
     })
-  )
-}
+  );
+};
 
-server.on('connection', async (ws) => {
-  clients.add(ws)
-  console.log('Nouvelle connexion WebSocket établie.')
+connectDB().then(() => {
+  server.on('connection', async (ws) => {
+    clients.add(ws);
+    console.log('Nouvelle connexion WebSocket établie.');
 
-  sendInvites(ws);
+    sendInvites(ws);
 
-  ws.on('message', async (message) => {
-    let data = JSON.parse(message)
-    console.log(data)
-    switch (data.action) {
-      case 'getinvites':
-        sendInvites(ws);
-        break
-      case 'addInvite':
-        const id = await InviteController.addInvite(data.item)
-        data.item.id = id;
-        console.log(data.item)
-        const newinvite = {
-          action: 'add',
-          item: data.item
-        }
+    ws.on('message', async (message) => {
+      let data = JSON.parse(message);
+      switch (data.action) {
+        case 'getinvites':
+          sendInvites(ws);
+          break;
+        case 'addInvite':
+          const id = await InviteController.addInvite(data.item);
+          data.item.id = id;
+          console.log(data.item);
+          const newinvite = {
+            action: 'add',
+            item: data.item
+          };
 
-        broadcast(newinvite);
+          broadcast(newinvite);
 
-        break
-      case 'updateInvite':
-        console.log('Invite reçu :', data.item)
-        InviteController.updateInvite(data.item, data.item.id)
+          break;
+        case 'updateInvite':
+          const _id = data.item._id
+          delete data.item._id
+          await InviteController.updateInvite(data.item, _id);
+          data.item._id = _id
+          const updateinvite = {
+            action: 'update',
+            item: data.item
+          };
 
-        const updateinvite = {
-          action: 'update',
-          item : data.item
-        }
-        
-        broadcast(updateinvite);
+          broadcast(updateinvite);
 
-        break
-    }
-  })
+          break;
+      }
+    });
 
-  ws.on('close', () => {
-    clients.delete(ws)
-    console.log('Connexion WebSocket fermée.')
-  })
-})
+    ws.on('close', () => {
+      clients.delete(ws);
+      console.log('Connexion WebSocket fermée.');
+    });
+  });
 
-console.log("Serveur WebSocket en cours d'exécution sur le port ", port)
+  console.log("Serveur WebSocket en cours d'exécution sur le port ", port);
+});
