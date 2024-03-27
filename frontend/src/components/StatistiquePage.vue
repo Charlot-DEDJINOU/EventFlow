@@ -52,13 +52,13 @@ export default {
 
         if (invite.sexe == 'Masculin') {
           masculin.value++
-        } else {
+        } else if (invite.sexe == 'Feminin') {
           feminin.value++
         }
 
-        if(invite.is_boursier == 1) {
+        if(invite.boursier == "Oui") {
           boursier.value++
-        } else {
+        } else if (invite.boursier == "Non") {
           no_boursier.value++
         }
       }
