@@ -30,9 +30,12 @@ export default {
       const searchText = text.value.toLowerCase()
       filterInvites.value = store.state.invites.filter((invite) => {
         return (
-          invite.appelation.toLowerCase().includes(searchText) ||
+          invite.nom.toLowerCase().includes(searchText) ||
+          invite.prenom.toLowerCase().includes(searchText) ||
+          invite.email.toLowerCase().includes(searchText) ||
+          invite.sexe.toLowerCase().includes(searchText) ||
           invite.status.toLowerCase().includes(searchText) ||
-          invite.numero.toLowerCase().includes(searchText)
+          invite.telephone.toLowerCase().includes(searchText)
         )
       })
     }
