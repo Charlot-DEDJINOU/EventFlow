@@ -38,11 +38,11 @@ export default {
           lyceen.value++
         } else if (invite.status == 'Entrepreneur') {
           entrepreneur.value++
-        }else if (invite.status == 'Cadre') {
+        } else if (invite.status == 'Cadre') {
           cadre.value++
         }
 
-        if(invite.sexe == 'Masculin') {
+        if (invite.sexe == 'Masculin') {
           masculin.value++
         } else {
           feminin.value++
@@ -88,7 +88,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width: (100 * etudiant) / (total) + '%'
+              width: (100 * etudiant) / total + '%'
             }"
           ></div>
         </div>
@@ -96,7 +96,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Cadres Administratifs/Responsables</span>
-          <i>{{ cadre + '/' + (total) }}</i>
+          <i>{{ cadre + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -109,7 +109,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width: (100 * cadre) / (total) + '%'
+              width: (100 * cadre) / total + '%'
             }"
           ></div>
         </div>
@@ -117,7 +117,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Enseignants</span>
-          <i>{{ enseignant + '/' + (total) }}</i>
+          <i>{{ enseignant + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -130,7 +130,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width: (100 * enseignant) / (total) + '%'
+              width: (100 * enseignant) / total + '%'
             }"
           ></div>
         </div>
@@ -138,7 +138,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Diplomés</span>
-          <i>{{ diplome + '/' + (total) }}</i>
+          <i>{{ diplome + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -150,14 +150,14 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * diplome) / (total) + '%' }"
+            :style="{ width: (100 * diplome) / total + '%' }"
           ></div>
         </div>
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Lyceens</span>
-          <i>{{ lyceen + '/' + (total) }}</i>
+          <i>{{ lyceen + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -169,14 +169,14 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * lyceen) / (total) + '%' }"
+            :style="{ width: (100 * lyceen) / total + '%' }"
           ></div>
         </div>
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Entrepreneurs</span>
-          <i>{{ entrepreneur + '/' + (total) }}</i>
+          <i>{{ entrepreneur + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -189,8 +189,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width:
-                (100 * entrepreneur) / (total) + '%'
+              width: (100 * entrepreneur) / total + '%'
             }"
           ></div>
         </div>
@@ -198,7 +197,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Masculin</span>
-          <i>{{ masculin + '/' + (total) }}</i>
+          <i>{{ masculin + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -211,8 +210,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width:
-                (100 * masculin) / (total) + '%'
+              width: (100 * masculin) / total + '%'
             }"
           ></div>
         </div>
@@ -220,7 +218,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Feminin</span>
-          <i>{{ feminin + '/' + (total) }}</i>
+          <i>{{ feminin + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -233,8 +231,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width:
-                (100 * feminin) / (total) + '%'
+              width: (100 * feminin) / total + '%'
             }"
           ></div>
         </div>

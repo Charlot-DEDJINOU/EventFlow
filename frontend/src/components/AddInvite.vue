@@ -11,8 +11,8 @@ export default {
       appelation: '',
       numero: '',
       status: 'Enseignant',
-      email : '',
-      sexe : 'Masculin',
+      email: '',
+      sexe: 'Masculin',
       is_entry: 0
     })
     const show = ref(false)
