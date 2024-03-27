@@ -15,14 +15,15 @@ export default {
     const success = ref(true)
 
     const data = ref({
-      appelation: route.params.appelation,
-      id: route.params.id,
-      numero: route.params.numero,
+      nom: route.params.nom,
+      prenom: route.params.prenom,
+      _id: route.params._id,
+      telephone: route.params.telephone,
       status: route.params.status,
       email: route.params.email,
       sexe: route.params.sexe,
-      is_boursier : route.params.is_boursier == 'true' ? '1' : '0',
-      is_entry: route.params.is_entry == 'true' ? '1' : '0'
+      boursier : route.params.boursier,
+      present: route.params.present
     })
 
     const show = ref(false)
@@ -30,13 +31,14 @@ export default {
     const onSubmit = (e) => {
       e.preventDefault()
       if (
-        data.value.appelation === '' ||
-        data.value.numero === '' ||
+        data.value.nom === '' ||
+        data.value.prenom === '' ||
+        data.value.telephone === '' ||
         data.value.status === '' ||
         data.value.email === '' ||
         data.value.sexe === '' ||
-        data.value.is_boursier === null,
-        data.value.is_entry === null
+        data.value.boursier === '',
+        data.value.present === ''
       )
         show.value = true
       else {
@@ -69,13 +71,24 @@ export default {
   <div class="container d-flex justify-content-center align-items-center mt-5">
     <form class="row g-3 form-update p-5" @submit="onSubmit" v-if="success">
       <div class="col-md-6">
-        <label for="validationDefault01" class="form-label">Nom - Prenoms</label>
+        <label for="validationDefault01" class="form-label">Nom</label>
         <input
           type="text"
           class="form-control"
           id="validationDefault01"
-          placeholder="Mark"
-          v-model="data.appelation"
+          placeholder="DEDJINOU"
+          v-model="data.nom"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="validationDefault011" class="form-label">Prenom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationDefault011"
+          placeholder="Charlot"
+          v-model="data.prenom"
           required
         />
       </div>
@@ -104,15 +117,15 @@ export default {
           class="form-control"
           id="validationDefault02"
           placeholder="59105267"
-          v-model="data.numero"
+          v-model="data.telephone"
           required
         />
       </div>
-      <div class="col-md-12">
-        <label for="validationDefault08" class="form-label">Êtes-vous bénéficiaire du programme de bourse de la MCF ?</label>
-        <select class="form-select" id="validationDefault08" required v-model="data.is_boursier">
-          <option value="1">Oui</option>
-          <option value="0">Non</option>
+      <div class="col-md-6">
+        <label for="validationDefault08" class="form-label">Bénéficiaire du programme MCF ?</label>
+        <select class="form-select" id="validationDefault08" required v-model="data.boursier">
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -129,9 +142,9 @@ export default {
       </div>
       <div class="col-md-6 mb-3">
         <label for="validationDefault04" class="form-label">Présent</label>
-        <select class="form-select" id="validationDefault04" required v-model="data.is_entry">
-          <option value="1" selected>Oui</option>
-          <option value="0">Non</option>
+        <select class="form-select" id="validationDefault04" required v-model="data.present">
+          <option value="Oui" selected>Oui</option>
+          <option value="Non">Non</option>
         </select>
       </div>
       <div class="alet alert-danger" v-if="show">Veuillez remplir tout les champs</div>
