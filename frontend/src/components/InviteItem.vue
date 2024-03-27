@@ -27,8 +27,10 @@ export default {
     <div class="d-flex flex-wrap justify-content-between align-items-center" style="width: 80%">
       <div class="m-2 d-flex flex-column w-50">
         <span class="m-2">{{ invite.appelation }}</span>
+        <span class="m-2">{{ invite.sexe }}</span>
         <span class="m-2">{{ invite.status }}</span>
         <span class="m-2">{{ invite.numero }}</span>
+        <span class="m-2">{{ invite.email }}</span>
       </div>
 
       <span class="m-2 fw-bold">{{ invite.is_entry == 1 ? 'Present' : 'Absent' }}</span>
@@ -43,6 +45,10 @@ export default {
         invite.numero +
         '/' +
         invite.status +
+        '/' +
+        invite.email +
+        '/' +
+        invite.sexe +
         '/' +
         invite.is_entry
       "
