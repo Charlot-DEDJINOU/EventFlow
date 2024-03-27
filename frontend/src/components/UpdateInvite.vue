@@ -21,8 +21,8 @@ export default {
       status: route.params.status,
       email: route.params.email,
       sexe: route.params.sexe,
-      is_boursier : route.params.is_boursier,
-      is_entry: route.params.is_entry
+      is_boursier : route.params.is_boursier == 'true' ? '1' : '0',
+      is_entry: route.params.is_entry == 'true' ? '1' : '0'
     })
 
     const show = ref(false)
@@ -111,8 +111,8 @@ export default {
       <div class="col-md-12">
         <label for="validationDefault08" class="form-label">Êtes-vous bénéficiaire du programme de bourse de la MCF ?</label>
         <select class="form-select" id="validationDefault08" required v-model="data.is_boursier">
-          <option value="true">Oui</option>
-          <option value="fasle">Non</option>
+          <option value="1">Oui</option>
+          <option value="0">Non</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -130,8 +130,8 @@ export default {
       <div class="col-md-6 mb-3">
         <label for="validationDefault04" class="form-label">Présent</label>
         <select class="form-select" id="validationDefault04" required v-model="data.is_entry">
-          <option value="true" selected>Oui</option>
-          <option value="false">Non</option>
+          <option value="1" selected>Oui</option>
+          <option value="0">Non</option>
         </select>
       </div>
       <div class="alet alert-danger" v-if="show">Veuillez remplir tout les champs</div>
