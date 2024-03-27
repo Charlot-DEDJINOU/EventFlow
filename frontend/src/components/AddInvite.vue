@@ -8,26 +8,28 @@ export default {
   },
   setup(props) {
     const data = ref({
-      appelation: '',
-      numero: '',
+      nom: '',
+      prenom: '',
+      telephone: '',
       status: 'Enseignant',
       email: '',
       sexe: 'Masculin',
-      is_boursier : 0,
-      is_entry: 0
+      boursier : 'Non',
+      present: 'Non'
     })
     const show = ref(false)
 
     const onSubmit = (e) => {
       e.preventDefault()
       if (
-        data.value.appelation === '' ||
-        data.value.numero === '' ||
+        data.value.nom === '' ||
+        data.value.prenom === '' ||
+        data.value.telephone === '' ||
         data.value.status === '' ||
         data.value.email === '' ||
         data.value.sexe === '' ||
-        data.value.is_boursier === null ||
-        data.value.is_entry === null
+        data.value.boursier === '' ||
+        data.value.present === ''
       )
         show.value = true
       else {
@@ -54,13 +56,24 @@ export default {
 <template>
   <form class="row g-3" @submit="onSubmit">
     <div class="col-md-6">
-      <label for="validationDefault01" class="form-label">Nom - Prenoms</label>
+      <label for="validationDefault01" class="form-label">Nom</label>
       <input
         type="text"
         class="form-control"
         id="validationDefault01"
-        placeholder="Mark"
-        v-model="data.appelation"
+        placeholder="DEDJINOU"
+        v-model="data.nom"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault011" class="form-label">Prenom</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationDefault011"
+        placeholder="Charlot"
+        v-model="data.prenom"
         required
       />
     </div>
@@ -89,15 +102,15 @@ export default {
         class="form-control"
         id="validationDefault02"
         placeholder="59105267"
-        v-model="data.numero"
+        v-model="data.telephone"
         required
       />
     </div>
-    <div class="col-md-12">
-      <label for="validationDefault08" class="form-label">Êtes-vous bénéficiaire du programme de bourse de la MCF ?</label>
-      <select class="form-select" id="validationDefault08" required v-model="data.is_boursier">
-        <option value="1">Oui</option>
-        <option value="0">Non</option>
+    <div class="col-md-6">
+      <label for="validationDefault08" class="form-label">Bénéficiaire du programme MCF ?</label>
+      <select class="form-select" id="validationDefault08" required v-model="data.boursier">
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
       </select>
     </div>
     <div class="col-md-6">
@@ -114,9 +127,9 @@ export default {
     </div>
     <div class="col-md-6">
       <label for="validationDefault04" class="form-label">Présent</label>
-      <select class="form-select" id="validationDefault04" required v-model="data.is_entry">
-        <option value="1" selected>Oui</option>
-        <option value="0">Non</option>
+      <select class="form-select" id="validationDefault04" required v-model="data.present">
+        <option value="Oui" selected>Oui</option>
+        <option value="Non">Non</option>
       </select>
     </div>
     <div class="alet alert-danger" v-if="show">Veuillez remplir tout les champs</div>
