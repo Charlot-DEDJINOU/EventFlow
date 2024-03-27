@@ -14,7 +14,7 @@ export default createStore({
     },
     updateInvite(state, updatedInvite) {
       for (let i = 0; i < state.invites.length; i++) {
-        if (state.invites[i].id == updatedInvite.id) {
+        if (state.invites[i]._id == updatedInvite._id) {
           state.invites[i] = updatedInvite
           break
         }
