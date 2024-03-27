@@ -6,50 +6,46 @@ export default {
   setup() {
     const store = useStore()
 
-    let etudiant_present = ref(0)
-    let etudiant_absent = ref(0)
-    let enseignant_present = ref(0)
-    let enseignant_absent = ref(0)
-    let diplome_present = ref(0)
-    let diplome_absent = ref(0)
-    let lyceen_present = ref(0)
-    let lyceen_absent = ref(0)
-    let entrepreneur_present = ref(0)
-    let entrepreneur_absent = ref(0)
+    let total = ref(store.state.invites.length)
+    let etudiant = ref(0)
+    let enseignant = ref(0)
+    let diplome = ref(0)
+    let lyceen = ref(0)
+    let entrepreneur = ref(0)
+    let cadre = ref(0)
+    let masculin = ref(0)
+    let feminin = ref(0)
 
     const statistiques = () => {
-      etudiant_present.value = 0
-      etudiant_absent.value = 0
-      enseignant_present.value = 0
-      enseignant_absent.value = 0
-      diplome_present.value = 0
-      diplome_absent.value = 0
-      lyceen_present.value = 0
-      lyceen_absent.value = 0
-      entrepreneur_present.value = 0
-      entrepreneur_absent.value = 0
+      etudiant.value = 0
+      enseignant.value = 0
+      diplome.value = 0
+      lyceen.value = 0
+      entrepreneur.value = 0
+      cadre.value = 0
+      masculin.value = 0
+      feminin.value = 0
+      total.value = store.state.invites.length
 
       for (const invite of store.state.invites) {
-        if (invite.status == 'Etudiant' && invite.is_entry == 1) {
-          etudiant_present.value++
-        } else if (invite.status == 'Etudiant' && invite.is_entry == 0) {
-          etudiant_absent.value++
-        } else if (invite.status == 'Enseignant' && invite.is_entry == 1) {
-          enseignant_present.value++
-        } else if (invite.status == 'Enseignant' && invite.is_entry == 0) {
-          enseignant_absent.value++
-        } else if (invite.status == 'Diplome' && invite.is_entry == 1) {
-          diplome_present.value++
-        } else if (invite.status == 'Diplome' && invite.is_entry == 0) {
-          diplome_absent.value++
-        } else if (invite.status == 'Lyceen' && invite.is_entry == 1) {
-          lyceen_present.value++
-        } else if (invite.status == 'Lyceen' && invite.is_entry == 0) {
-          lyceen_absent.value++
-        } else if (invite.status == 'Entrepreneur' && invite.is_entry == 1) {
-          entrepreneur_present.value++
-        } else if (invite.status == 'Entrepreneur' && invite.is_entry == 0) {
-          entrepreneur_absent.value++
+        if (invite.status == 'Etudiant') {
+          etudiant.value++
+        } else if (invite.status == 'Enseignant') {
+          enseignant.value++
+        } else if (invite.status == 'Diplome') {
+          diplome.value++
+        } else if (invite.status == 'Lyceen') {
+          lyceen.value++
+        } else if (invite.status == 'Entrepreneur') {
+          entrepreneur.value++
+        }else if (invite.status == 'Cadre') {
+          cadre.value++
+        }
+
+        if(invite.sexe == 'Masculin') {
+          masculin.value++
+        } else {
+          feminin.value++
         }
       }
     }
@@ -59,16 +55,15 @@ export default {
     watch(() => store.state.invites, statistiques)
 
     return {
-      etudiant_present,
-      etudiant_absent,
-      enseignant_present,
-      enseignant_absent,
-      diplome_present,
-      diplome_absent,
-      lyceen_present,
-      lyceen_absent,
-      entrepreneur_present,
-      entrepreneur_absent
+      etudiant,
+      enseignant,
+      diplome,
+      lyceen,
+      entrepreneur,
+      cadre,
+      masculin,
+      feminin,
+      total
     }
   }
 }
@@ -80,7 +75,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Etudiants</span>
-          <i>{{ etudiant_present + '/' + (etudiant_absent + etudiant_present) }}</i>
+          <i>{{ etudiant + '/' + total }}</i>
         </div>
         <div
           class="progress"
@@ -93,7 +88,28 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width: (100 * etudiant_present) / (etudiant_absent + etudiant_present) + '%'
+              width: (100 * etudiant) / (total) + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Cadres Administratifs/Responsables</span>
+          <i>{{ cadre + '/' + (total) }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width: (100 * cadre) / (total) + '%'
             }"
           ></div>
         </div>
@@ -101,7 +117,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Enseignants</span>
-          <i>{{ enseignant_present + '/' + (enseignant_absent + enseignant_present) }}</i>
+          <i>{{ enseignant + '/' + (total) }}</i>
         </div>
         <div
           class="progress"
@@ -114,7 +130,7 @@ export default {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
-              width: (100 * enseignant_present) / (enseignant_absent + enseignant_present) + '%'
+              width: (100 * enseignant) / (total) + '%'
             }"
           ></div>
         </div>
@@ -122,7 +138,7 @@ export default {
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Diplomés</span>
-          <i>{{ diplome_present + '/' + (diplome_absent + diplome_present) }}</i>
+          <i>{{ diplome + '/' + (total) }}</i>
         </div>
         <div
           class="progress"
@@ -134,14 +150,14 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * diplome_present) / (diplome_absent + diplome_present) + '%' }"
+            :style="{ width: (100 * diplome) / (total) + '%' }"
           ></div>
         </div>
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Lyceens</span>
-          <i>{{ lyceen_present + '/' + (lyceen_absent + lyceen_present) }}</i>
+          <i>{{ lyceen + '/' + (total) }}</i>
         </div>
         <div
           class="progress"
@@ -153,14 +169,14 @@ export default {
         >
           <div
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-            :style="{ width: (100 * lyceen_present) / (lyceen_absent + lyceen_present) + '%' }"
+            :style="{ width: (100 * lyceen) / (total) + '%' }"
           ></div>
         </div>
       </div>
       <div class="col-md-12 mb-5">
         <div class="d-flex justify-content-between">
           <span class="mb-2 d-inline-block fs-5 fw-medium">Entrepreneurs</span>
-          <i>{{ entrepreneur_present + '/' + (entrepreneur_absent + entrepreneur_present) }}</i>
+          <i>{{ entrepreneur + '/' + (total) }}</i>
         </div>
         <div
           class="progress"
@@ -174,7 +190,51 @@ export default {
             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
             :style="{
               width:
-                (100 * entrepreneur_present) / (entrepreneur_absent + entrepreneur_present) + '%'
+                (100 * entrepreneur) / (total) + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Masculin</span>
+          <i>{{ masculin + '/' + (total) }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width:
+                (100 * masculin) / (total) + '%'
+            }"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-5">
+        <div class="d-flex justify-content-between">
+          <span class="mb-2 d-inline-block fs-5 fw-medium">Feminin</span>
+          <i>{{ feminin + '/' + (total) }}</i>
+        </div>
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Animated striped example"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            :style="{
+              width:
+                (100 * feminin) / (total) + '%'
             }"
           ></div>
         </div>
