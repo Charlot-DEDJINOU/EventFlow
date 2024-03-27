@@ -1,8 +1,9 @@
-const { connectToDatabase } = require("../database/database");
+const { connectToDatabase, closeConnection } = require("../database/database");
 
 const addInvite = async (item) => {
-    const client = await connectToDatabase();
+    let client;
     try {
+        const client = await connectToDatabase();
         const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
         const queryText = `
             INSERT INTO invites (appelation, numero, status, sexe, email, is_boursier, is_entry)
@@ -16,24 +17,34 @@ const addInvite = async (item) => {
     } catch (error) {
         console.error("Erreur lors de l'insertion :", error);
         throw error;
+    }  finally {
+        if (client) {
+            closeConnection();
+        }
     }
 };
 
 const getInvites = async () => {
-    const client = await connectToDatabase();
+    let client;
     try {
+        const client = await connectToDatabase();
         const queryText = `SELECT * FROM invites`;
         const result = await client.query(queryText);
         return result.rows;
     } catch (error) {
         console.error('Erreur lors de la récupération des invites :', error);
         throw error;
+    }  finally {
+        if (client) {
+            closeConnection();
+        }
     }
 };
 
 const updateInvite = async (item, id) => {
-    const client = await connectToDatabase();
+    let client;
     try {
+        const client = await connectToDatabase();
         const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
         const queryText = `
             UPDATE invites 
@@ -46,12 +57,17 @@ const updateInvite = async (item, id) => {
     } catch (error) {
         console.error("Erreur lors de la mise à jour :", error);
         throw error;
+    }  finally {
+        if (client) {
+            closeConnection();
+        }
     }
 };
 
 const deleteInvite = async (id) => {
-    const client = await connectToDatabase();
+    let client;
     try {
+        const client = await connectToDatabase();
         const queryText = `DELETE FROM invites WHERE id = $1`;
         const values = [id];
         const result = await client.query(queryText, values);
@@ -59,6 +75,10 @@ const deleteInvite = async (id) => {
     } catch (error) {
         console.error("Erreur lors de la suppression :", error);
         throw error;
+    }  finally {
+        if (client) {
+            closeConnection();
+        }
     }
 };
 
