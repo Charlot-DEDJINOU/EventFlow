@@ -1,11 +1,11 @@
-const databaseInit = require('./database/databaseInit')
+const database = require('./database/database')
 const InviteController = require('./controller/InviteController')
 const WebSocket = require('ws')
 
 const port = process.env.PORT || 8080
 const server = new WebSocket.Server({ port: port })
 
-databaseInit.initializeDatabase()
+database.createInvitesTable()
 
 let clients = new Set()
 

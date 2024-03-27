@@ -1,81 +1,70 @@
-const databaseConfig = require("../database/database");
+const { connectToDatabase } = require("../database/database");
 
 const addInvite = async (item) => {
-  try {
-    const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
-    const db = databaseConfig.createDb();
-
-    await new Promise((resolve, reject) => {
-      db.run(
-        "INSERT INTO Invites (appelation, numero, status, sexe, email, is_boursier, is_entry) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [appelation, numero, status, sexe, email, is_boursier, is_entry],
-        function (err) {
-          if (err) {
-            console.error(err);
-            reject(err);
-            return;
-          }
-          resolve();
-        }
-      );
-    });
-
-    const lastInsertID = await new Promise((resolve, reject) => {
-      db.get("SELECT last_insert_rowid() as lastID", (err, row) => {
-        if (err) {
-          console.error(err);
-          reject(err);
-          return;
-        }
-        resolve(row.lastID);
-      });
-    });
-
-    db.close();
-
-    return lastInsertID;
-  } catch (error) {
-    console.error("Erreur lors de l'insertion :", error);
-    throw error;
-  }
-};
-
-const getInvites = () => {
-  const db = databaseConfig.createDb();
-  return new Promise((resolve, reject) => {
-    db.all("SELECT * FROM Invites", (err, rows) => {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
-
-  db.close()
-};
-
-const update = (item, id) => {
-  const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
-  const db = databaseConfig.createDb();
-  db.run(
-    "UPDATE Invites SET appelation = ?, numero = ?, status = ?, sexe = ?, email = ?, is_boursier = ?, is_entry = ? WHERE id = ?",
-    [appelation, numero, status, sexe, email, is_boursier, is_entry, id],
-
-    (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log("Informations de l'invité mises à jour avec succès");
+    const client = await connectToDatabase();
+    try {
+        const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
+        const queryText = `
+            INSERT INTO invites (appelation, numero, status, sexe, email, is_boursier, is_entry)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING id
+        `;
+        const values = [appelation, numero, status, sexe, email, is_boursier, is_entry];
+        const result = await client.query(queryText, values);
+        console.log('Document inséré avec succès:', result.rows[0].id);
+        return result.rows[0].id;
+    } catch (error) {
+        console.error("Erreur lors de l'insertion :", error);
+        throw error;
     }
-  );
-  db.close()
+};
+
+const getInvites = async () => {
+    const client = await connectToDatabase();
+    try {
+        const queryText = `SELECT * FROM invites`;
+        const result = await client.query(queryText);
+        return result.rows;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des invites :', error);
+        throw error;
+    }
+};
+
+const updateInvite = async (item, id) => {
+    const client = await connectToDatabase();
+    try {
+        const { appelation, numero, status, sexe, email, is_boursier, is_entry } = item;
+        const queryText = `
+            UPDATE invites 
+            SET appelation = $1, numero = $2, status = $3, sexe = $4, email = $5, is_boursier = $6, is_entry = $7
+            WHERE id = $8
+        `;
+        const values = [appelation, numero, status, sexe, email, is_boursier, is_entry, id];
+        const result = await client.query(queryText, values);
+        console.log('Document mis à jour avec succès');
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour :", error);
+        throw error;
+    }
+};
+
+const deleteInvite = async (id) => {
+    const client = await connectToDatabase();
+    try {
+        const queryText = `DELETE FROM invites WHERE id = $1`;
+        const values = [id];
+        const result = await client.query(queryText, values);
+        console.log('Document supprimé avec succès');
+    } catch (error) {
+        console.error("Erreur lors de la suppression :", error);
+        throw error;
+    }
 };
 
 module.exports = {
-  addInvite,
-  getInvites,
-  update
+    addInvite,
+    getInvites,
+    updateInvite,
+    deleteInvite
 };
