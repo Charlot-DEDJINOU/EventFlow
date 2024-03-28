@@ -13,9 +13,6 @@ logs/
 # Fichiers de sauvegarde (par exemple, pour Vim)
 *.swp
 
-# Fichiers d'environnement (pour stocker les secrets, ne doivent pas être versionnés)
-.env
-
 # Fichiers de configuration spécifiques à l'utilisateur
 config/userconfig.json
 
