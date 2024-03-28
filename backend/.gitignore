@@ -15,6 +15,7 @@ logs/
 
 # Fichiers de configuration spécifiques à l'utilisateur
 config/userconfig.json
+.env.local
 
 # Fichiers de sauvegarde de bases de données SQLite
 *.sqlite3
