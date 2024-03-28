@@ -1,4 +1,4 @@
-export const socket = new WebSocket('wss://eventflow-6aoy.onrender.com')
+export const socket = new WebSocket('wss://eventflowwebsocket.onrender.com')
 
 socket.onopen = function () {
   console.log('Connexion WebSocket établie. ')

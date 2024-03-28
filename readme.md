@@ -1,13 +1,13 @@
 # Projet de gestion des invités
 
-Ce projet est une application de gestion des invités pour un événement. Il permet d'ajouter, de mettre à jour, de supprimer et de rechercher des invités. L'application utilise des WebSockets pour des mises à jour en temps réel et intègre une base de données SQLite pour stocker les données des invités.
+Ce projet est une application de gestion des invités pour un événement. Il permet d'ajouter, de mettre à jour, de supprimer et de rechercher des invités. L'application utilise des WebSockets pour des mises à jour en temps réel et intègre une base de données Mongo db pour stocker les données des invités.
 
 ## Technologies utilisées
 
 - Vue.js : Framework JavaScript pour la partie front-end de l'application.
 - Vuex : Bibliothèque de gestion d'état pour Vue.js, utilisée pour gérer l'état global de l'application.
 - WebSocket : Protocole de communication bidirectionnelle en temps réel entre le navigateur et le serveur.
-- SQLite : Système de gestion de base de données relationnelle utilisé pour stocker les données des invités.
+- Mongo db : Système de gestion de base de données relationnelle utilisé pour stocker les données des invités.
 
 ## Fonctionnalités
 
