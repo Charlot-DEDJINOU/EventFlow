@@ -6,7 +6,7 @@
         L’être humain à le potentiel de devenir quelque chose d’autre - David Goggins
       </p>
       <div class="copyright my-3">
-        &copy; Copyright <strong><span>HBD </span></strong>All Rights Reserved
+        &copy; Copyright <strong><span>Event Flow </span></strong>All Rights Reserved
       </div>
       <div>
         Created by
