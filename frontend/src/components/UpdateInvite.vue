@@ -22,7 +22,7 @@ export default {
       status: route.params.status,
       email: route.params.email,
       sexe: route.params.sexe,
-      boursier : route.params.boursier,
+      boursier: route.params.boursier,
       present: route.params.present
     })
 
@@ -31,14 +31,14 @@ export default {
     const onSubmit = (e) => {
       e.preventDefault()
       if (
-        data.value.nom === '' ||
-        data.value.prenom === '' ||
-        data.value.telephone === '' ||
-        data.value.status === '' ||
-        data.value.email === '' ||
-        data.value.sexe === '' ||
-        data.value.boursier === '',
-        data.value.present === ''
+        (data.value.nom === '' ||
+          data.value.prenom === '' ||
+          data.value.telephone === '' ||
+          data.value.status === '' ||
+          data.value.email === '' ||
+          data.value.sexe === '' ||
+          data.value.boursier === '',
+        data.value.present === '')
       )
         show.value = true
       else {

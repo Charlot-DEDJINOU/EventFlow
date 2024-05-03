@@ -33,7 +33,7 @@ export default {
         <span class="m-2">{{ invite.email }}</span>
       </div>
 
-      <span class="m-2 fw-bold">{{ invite.present === "Oui" ? 'Present' : 'Absent' }}</span>
+      <span class="m-2 fw-bold">{{ invite.present === 'Oui' ? 'Present' : 'Absent' }}</span>
     </div>
     <router-link
       :to="

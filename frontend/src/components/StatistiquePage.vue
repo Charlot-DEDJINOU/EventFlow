@@ -48,7 +48,7 @@ export default {
           cadre.value++
         } else if (invite.status == 'Autre') {
           autre.value++
-        } 
+        }
 
         if (invite.sexe == 'Masculin') {
           masculin.value++
@@ -56,9 +56,9 @@ export default {
           feminin.value++
         }
 
-        if(invite.boursier == "Oui") {
+        if (invite.boursier == 'Oui') {
           boursier.value++
-        } else if (invite.boursier == "Non") {
+        } else if (invite.boursier == 'Non') {
           no_boursier.value++
         }
       }

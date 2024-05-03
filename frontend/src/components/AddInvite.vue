@@ -14,7 +14,7 @@ export default {
       status: 'Enseignant',
       email: '',
       sexe: 'Masculin',
-      boursier : 'Non',
+      boursier: 'Non',
       present: 'Non'
     })
     const show = ref(false)

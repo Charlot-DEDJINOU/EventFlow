@@ -20,7 +20,6 @@ export default {
     const text = ref('')
 
     socket.onmessage = function (event) {
-      console.log(event)
       updateState(JSON.parse(event.data), store, search)
     }
 
